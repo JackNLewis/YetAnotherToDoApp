@@ -11,14 +11,13 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        include: source,
+        test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js','.css'],
   },
   output: {
     filename: 'index_bundle.js',

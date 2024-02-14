@@ -1,7 +1,16 @@
-import * as React from "react";
+import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import MyButton from "./components/square"
+import App from './App'
+import { ColorModeScript } from '@chakra-ui/react'
+import theme from './theme'
 
 const root = createRoot(document.getElementById("root"));
 
-root.render(<MyButton />);
+console.log(theme.config)
+
+root.render(
+<>
+    <ColorModeScript initialColorMode={'dark'} />
+    <App />
+</>
+);
