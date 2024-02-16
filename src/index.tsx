@@ -1,16 +1,25 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App'
-import { ColorModeScript } from '@chakra-ui/react'
-import theme from './theme'
+import { ColorModeScript, ThemeConfig, extendTheme, ChakraProvider} from '@chakra-ui/react'
 
-const root = createRoot(document.getElementById("root"));
 
-console.log(theme.config)
 
+const config: ThemeConfig = {
+    initialColorMode: "dark",
+    useSystemColorMode: false,
+  }
+  
+const theme = extendTheme({config: config})
+
+
+const root = createRoot(document.getElementById('root'));
 root.render(
-<>
-    <ColorModeScript initialColorMode={'dark'} />
-    <App />
-</>
+    <>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </>
 );
+

@@ -1,19 +1,24 @@
 import * as React from 'react';
-import './App.css'
-import { ChakraProvider } from '@chakra-ui/react'
-import { extendTheme, Text,ThemeConfig} from "@chakra-ui/react"
-import theme from './theme'
+import { Button, ChakraProvider, useColorMode, ColorModeScript } from '@chakra-ui/react'
+import { Text, VStack, extendTheme, ThemeConfig } from "@chakra-ui/react"
 
+// const config: ThemeConfig = {
+//   initialColorMode: "dark",
+//   useSystemColorMode: false,
+// }
 
+// const theme = extendTheme({config: config})
 
 export default function App() {
+  const { colorMode, toggleColorMode } = useColorMode()
 
-  // 2. Wrap ChakraProvider at the root of your app
   return (
-    <ChakraProvider theme={theme}>
-      <div className='container'>
-      <Text fontSize='6xl'>Yet Another ToDo App</Text>
-      </div>
-    </ChakraProvider>
+        <VStack paddingTop={'10vh'}>
+          <Text fontSize='6xl'>Yet Another ToDo App</Text>
+          <Button onClick={toggleColorMode}>
+        Toggle 
+      </Button>
+         
+        </VStack>
   )
 }
