@@ -1,24 +1,23 @@
 import * as React from 'react';
-import { Button, ChakraProvider, useColorMode, ColorModeScript } from '@chakra-ui/react'
-import { Text, VStack, extendTheme, ThemeConfig } from "@chakra-ui/react"
-
-// const config: ThemeConfig = {
-//   initialColorMode: "dark",
-//   useSystemColorMode: false,
-// }
-
-// const theme = extendTheme({config: config})
+import { Button, ChakraProvider, useColorMode, ColorModeScript, Center } from '@chakra-ui/react'
+import { Text, VStack, extendTheme, ThemeConfig , Input} from "@chakra-ui/react"
+import { SunIcon, MoonIcon } from '@chakra-ui/icons';
+import InputTask from './InputTask';
 
 export default function App() {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-        <VStack paddingTop={'10vh'}>
-          <Text fontSize='6xl'>Yet Another ToDo App</Text>
-          <Button onClick={toggleColorMode}>
-        Toggle 
-      </Button>
-         
+    <>
+    <Button onClick={toggleColorMode} position={'fixed'} right={0} margin={3}>
+                {colorMode === 'light' ? 
+                    <MoonIcon boxSize={3} />:
+                    <SunIcon boxSize={3}/> 
+                }
+            </Button> 
+        <VStack paddingTop={'5vh'} justifyContent={'center'} alignItems={'center'} h='100vh'>
+          <InputTask />
         </VStack>
+    </>
   )
 }
