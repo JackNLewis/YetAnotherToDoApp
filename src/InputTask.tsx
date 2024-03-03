@@ -1,33 +1,51 @@
 import * as React from 'react';
-import { HStack, Input, Button, Icon, useColorMode, Box } from '@chakra-ui/react';
+import {VStack, HStack, Input, Button, Icon, useColorMode, Box , Card, CardBody, Text} from '@chakra-ui/react';
 
 
 export default function InputTask(){
-    const { colorMode, toggleColorMode } = useColorMode()
-    const [yOffset, setYoffset] = React.useState('0vh');
+    const [ inputState, updateInputState ] = React.useState('');
+    const [ listState, updateListState ] = React.useState([]);
 
-    let customCSS = {
-        'caretColor': colorMode == 'light' ? 'darkgrey' : 'darkgrey',
-    }
+    function handleEnterTask(event: any): void{
+        if (event.key ==='Enter'){
+
+            updateListState([...listState, {key:listState.length+1, name : inputState}])
+            console.log(listState)
+            updateInputState('')
+        }      
+    } 
+
+    const items = listState.map((card) => {
+        return(
+        <Card key={card.key}>
+            <CardBody>
+                <Text> {card.name}</Text>
+            </CardBody>
+        </Card>)
+    })
     
-    let transitionCss = {
-        'transition' : 'transform 2s'
-    }
-
     return (
-        <HStack height={'100vh'}>
+       	<VStack justifyContent='space-between' height={'100%'} p='10'>
+        <VStack>
+            {items}
+        </VStack>
+
+	    <HStack>
             <Box position='relative'
-                top={yOffset}
                 transition='top 0.5s linear'>
             <Input
                 placeholder='enter task'
+                value={inputState}
                 variant='flushed'
                 size='lg'
-                onInput={() => setYoffset('40vh')}
+                w='100'
                 autoFocus={true}
-                sx={customCSS}
+                onChange={ (e) => updateInputState(e.target.value)}
+                onKeyPress={handleEnterTask}
                 />
             </Box>
-        </HStack>
+            </HStack>
+	</VStack>    
+	    
     )
 }
